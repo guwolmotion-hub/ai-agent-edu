@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 코딩 에이전트 완전 정복 | Claude Code · Codex · Gemini CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── reset ── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans KR',sans-serif;line-height:1.7;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+
+/* ── tokens ── */
+:root{
+  --accent:#5B4CF5;
+  --accent2:#00C9A7;
+  --accent3:#FF6B6B;
+  --gray50:#F8F9FA;
+  --gray100:#F1F3F5;
+  --gray200:#E9ECEF;
+  --gray400:#ADB5BD;
+  --gray600:#6C757D;
+  --gray900:#212529;
+  --border:#E9ECEF;
+  --radius:12px;
+  --radius-lg:20px;
+  --shadow:0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.1);
+}
+
+/* ── layout ── */
+.container{max-width:960px;margin:0 auto;padding:0 24px;}
+section{padding:80px 0;}
+section:nth-child(even){background:var(--gray50);}
+
+/* ── nav ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:960px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.nav-logo{font-weight:700;font-size:15px;color:var(--accent);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gray600);transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* ── hero ── */
+.hero{
+  padding:100px 0 80px;
+  background:linear-gradient(160deg,#fff 60%,#F0EFFE 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gray100);border:1px solid var(--border);
+  padding:6px 14px;border-radius:99px;
+  font-size:12px;font-weight:600;color:var(--gray600);
+  margin-bottom:24px;
+}
+.hero-badge span{width:7px;height:7px;background:var(--accent2);border-radius:50%;display:inline-block;}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.2;margin-bottom:20px;}
+.hero h1 em{color:var(--accent);font-style:normal;}
+.hero p{font-size:17px;color:var(--gray600);max-width:560px;line-height:1.8;margin-bottom:36px;}
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+.hero-meta-item{display:flex;flex-direction:column;}
+.hero-meta-item .label{font-size:11px;font-weight:600;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;}
+.hero-meta-item .val{font-size:14px;font-weight:600;color:var(--gray900);margin-top:2px;}
+
+/* ── section title ── */
+.section-title{margin-bottom:48px;}
+.section-title .eyebrow{
+  font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;
+  letter-spacing:.12em;margin-bottom:10px;display:block;
+}
+.section-title h2{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.25;}
+.section-title p{margin-top:12px;font-size:15px;color:var(--gray600);max-width:580px;line-height:1.75;}
+
+/* ── agent comparison cards ── */
+.agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.agent-card{
+  border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px 24px;background:#fff;
+  transition:box-shadow .2s,transform .2s;
+  page-break-inside:avoid;break-inside:avoid;
+}
+.agent-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+.agent-card.highlight{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;}
+.agent-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:16px;
+}
+.agent-icon.claude{background:#F0EFFE;}
+.agent-icon.codex{background:#E8F5E9;}
+.agent-icon.gemini{background:#FFF3E0;}
+.agent-card h3{font-size:17px;font-weight:700;margin-bottom:4px;}
+.agent-card .maker{font-size:12px;font-weight:500;color:var(--gray400);margin-bottom:14px;}
+.agent-card .desc{font-size:13.5px;color:var(--gray600);line-height:1.7;margin-bottom:18px;}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{
+  font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;
+  background:var(--gray100);color:var(--gray600);
+}
+.tag.green{background:#E8F5E9;color:#2E7D32;}
+.tag.purple{background:#F0EFFE;color:#5B4CF5;}
+.tag.orange{background:#FFF3E0;color:#E65100;}
+
+/* ── comparison table ── */
+.comp-table-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+thead th{
+  background:var(--gray50);padding:14px 20px;
+  text-align:left;font-weight:700;font-size:12px;
+  color:var(--gray600);text-transform:uppercase;letter-spacing:.06em;
+  border-bottom:1px solid var(--border);
+}
+thead th:first-child{width:180px;}
+tbody tr:hover{background:var(--gray50);}
+tbody td{padding:14px 20px;border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.5;}
+tbody tr:last-child td{border-bottom:none;}
+tbody td:first-child{font-weight:600;font-size:13px;color:var(--gray900);}
+.check{color:#2E7D32;font-weight:700;}
+.cross{color:var(--gray400);}
+.partial{color:#E65100;font-weight:600;}
+
+/* ── pricing ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pricing-card{
+  border:1.5px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;background:#fff;
+  page-break-inside:avoid;break-inside:avoid;
+}
+.pricing-card.featured{border-color:var(--accent);}
+.pricing-header{padding:24px 24px 20px;}
+.pricing-card.featured .pricing-header{background:var(--accent);color:#fff;}
+.pricing-name{font-size:15px;font-weight:700;margin-bottom:6px;}
+.pricing-price{font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;}
+.pricing-price span{font-size:14px;font-weight:400;opacity:.7;}
+.pricing-desc{font-size:12px;opacity:.8;margin-top:8px;line-height:1.5;}
+.pricing-body{padding:20px 24px;}
+.pricing-body ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.pricing-body li{font-size:13px;color:var(--gray600);padding-left:20px;position:relative;line-height:1.5;}
+.pricing-body li::before{content:'✓';position:absolute;left:0;color:var(--accent2);font-weight:700;}
+.pricing-card.featured .pricing-body li::before{color:var(--accent);}
+.pricing-badge{
+  display:inline-block;background:#5B4CF5;color:#fff;
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;
+  margin-left:6px;vertical-align:middle;
+}
+
+/* ── install steps ── */
+.install-tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
+.install-tab{
+  padding:8px 18px;border-radius:99px;border:1.5px solid var(--border);
+  font-size:13px;font-weight:600;cursor:pointer;background:#fff;
+  color:var(--gray600);transition:all .18s;
+}
+.install-tab.active,
+.install-tab:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+.install-panel{display:none;}
+.install-panel.active{display:block;}
+
+.step-list{display:flex;flex-direction:column;gap:16px;}
+.step{
+  display:flex;gap:16px;align-items:flex-start;
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;page-break-inside:avoid;break-inside:avoid;
+}
+.step-num{
+  flex-shrink:0;width:30px;height:30px;border-radius:50%;
+  background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-content{flex:1;}
+.step-content h4{font-size:14px;font-weight:700;margin-bottom:6px;}
+.step-content p{font-size:13px;color:var(--gray600);margin-bottom:10px;line-height:1.6;}
+
+/* ── code block ── */
+.code-block{
+  background:#1a1a2e;border-radius:10px;
+  overflow:hidden;margin-top:8px;
+}
+.code-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:#12121f;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.code-lang{font-size:11px;font-weight:600;color:#8892b0;font-family:'JetBrains Mono',monospace;}
+.copy-btn{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;color:#8892b0;
+  background:rgba(255,255,255,.07);border:none;border-radius:6px;
+  padding:5px 10px;cursor:pointer;transition:all .18s;font-family:'Noto Sans KR',sans-serif;
+}
+.copy-btn:hover{background:rgba(255,255,255,.14);color:#fff;}
+.copy-btn.copied{color:var(--accent2);}
+.code-body{padding:16px;overflow-x:auto;}
+.code-body code{
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:#cdd9e5;line-height:1.7;white-space:pre;display:block;
+}
+.code-body .comment{color:#636e7b;}
+.code-body .cmd{color:#79c0ff;}
+.code-body .str{color:#a5d6ff;}
+.code-body .kw{color:#ff79c6;}
+
+/* ── note box ── */
+.note{
+  background:#F0EFFE;border-left:3px solid var(--accent);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:14px 18px;font-size:13px;color:#3d2fa3;
+  margin-top:12px;line-height:1.6;
+}
+.note strong{font-weight:700;}
+.warning{background:#FFF3E0;border-color:#FF8C00;color:#7B4500;}
+.success{background:#E8F5E9;border-color:var(--accent2);color:#1B5E20;}
+
+/* ── concept cards ── */
+.concept-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.concept-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;page-break-inside:avoid;break-inside:avoid;
+}
+.concept-card .icon{font-size:26px;margin-bottom:12px;}
+.concept-card h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+.concept-card p{font-size:13px;color:var(--gray600);line-height:1.7;}
+
+/* ── footer ── */
+footer{
+  background:var(--gray900);color:var(--gray400);
+  padding:48px 0;text-align:center;font-size:13px;line-height:1.8;
+}
+footer strong{color:#fff;}
+footer a{color:var(--accent2);}
+
+/* ── responsive ── */
+@media(max-width:720px){
+  .agent-grid,.pricing-grid{grid-template-columns:1fr;}
+  .concept-grid{grid-template-columns:1fr;}
+  nav .nav-links{display:none;}
+  .hero{padding:64px 0 48px;}
+  section{padding:56px 0;}
+}
+
+/* ── print ── */
+@media print{
+  nav,.install-tabs{display:none!important;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .agent-card,.pricing-card,.step,.concept-card,tr{page-break-inside:avoid;break-inside:avoid;}
+  h1,h2,h3{page-break-after:avoid;}
+  a[href]::after{content:none!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">AI Agent Edu</span>
+    <div class="nav-links">
+      <a href="#compare">비교</a>
+      <a href="#pricing">요금제</a>
+      <a href="#install">설치</a>
+      <a href="#concepts">개념</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-badge"><span></span> 2025년 최신 기준 업데이트</div>
+    <h1>AI 코딩 에이전트<br><em>완전 정복 가이드</em></h1>
+    <p>Claude Code · OpenAI Codex · Google Gemini CLI — 세 가지 AI 에이전트의 차이점, 요금제, 설치 방법을 한눈에 정리했습니다.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">대상</span>
+        <span class="val">개발자 · 크리에이터</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">수준</span>
+        <span class="val">입문 ~ 중급</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">최종 수정</span>
+        <span class="val">2025년 4월</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1 : AGENT OVERVIEW -->
+<section id="compare">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">에이전트 비교</span>
+      <h2>3대 AI 코딩 에이전트</h2>
+      <p>터미널에서 직접 동작하는 CLI 기반 AI 에이전트입니다. 각각 만든 회사도 다르고, 강점도 다릅니다.</p>
+    </div>
+
+    <div class="agent-grid">
+      <!-- Claude Code -->
+      <div class="agent-card highlight">
+        <div class="agent-icon claude">🟣</div>
+        <h3>Claude Code</h3>
+        <div class="maker">Anthropic</div>
+        <p class="desc">파일을 직접 읽고 수정하며, 터미널 명령어를 실행하는 강력한 자율 코딩 에이전트. 메모리 시스템과 MCP(Model Context Protocol) 연동이 핵심 강점입니다.</p>
+        <div class="tag-list">
+          <span class="tag purple">파일 편집</span>
+          <span class="tag purple">MCP 연동</span>
+          <span class="tag purple">메모리</span>
+          <span class="tag purple">자율 루프</span>
+        </div>
+      </div>
+      <!-- Codex CLI -->
+      <div class="agent-card">
+        <div class="agent-icon codex">🟢</div>
+        <h3>Codex CLI</h3>
+        <div class="maker">OpenAI</div>
+        <p class="desc">GPT-4.1 기반의 CLI 코딩 도구. 코드 생성과 수정에 특화되어 있으며, 샌드박스 환경에서 안전하게 실행됩니다. VS Code 사이드바에서도 사용 가능합니다.</p>
+        <div class="tag-list">
+          <span class="tag green">코드 생성</span>
+          <span class="tag green">샌드박스</span>
+          <span class="tag green">VS Code 통합</span>
+        </div>
+      </div>
+      <!-- Gemini CLI -->
+      <div class="agent-card">
+        <div class="agent-icon gemini">🟠</div>
+        <h3>Gemini CLI</h3>
+        <div class="maker">Google DeepMind</div>
+        <p class="desc">Gemini 2.5 Pro 기반. 100만 토큰의 초대형 컨텍스트 창과 Google 검색 연동이 강점입니다. 개인 계정으로 하루 1,500회 무료 사용이 가능합니다.</p>
+        <div class="tag-list">
+          <span class="tag orange">1M 컨텍스트</span>
+          <span class="tag orange">구글 검색</span>
+          <span class="tag orange">무료 티어</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- comparison table -->
+    <div class="comp-table-wrap" style="margin-top:40px;">
+      <table>
+        <thead>
+          <tr>
+            <th>기능</th>
+            <th>Claude Code</th>
+            <th>Codex CLI</th>
+            <th>Gemini CLI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>파일 직접 편집</td>
+            <td><span class="check">✓ 완전 지원</span></td>
+            <td><span class="check">✓ 지원</span></td>
+            <td><span class="check">✓ 지원</span></td>
+          </tr>
+          <tr>
+            <td>터미널 명령 실행</td>
+            <td><span class="check">✓ 완전 지원</span></td>
+            <td><span class="partial">△ 샌드박스 내</span></td>
+            <td><span class="check">✓ 지원</span></td>
+          </tr>
+          <tr>
+            <td>웹 검색 연동</td>
+            <td><span class="partial">△ MCP 필요</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓ 기본 내장</span></td>
+          </tr>
+          <tr>
+            <td>MCP 서버 지원</td>
+            <td><span class="check">✓ 완전 지원</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>장기 메모리</td>
+            <td><span class="check">✓ CLAUDE.md</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>컨텍스트 크기</td>
+            <td>200K 토큰</td>
+            <td>128K 토큰</td>
+            <td><span class="check">1M 토큰</span></td>
+          </tr>
+          <tr>
+            <td>무료 사용</td>
+            <td><span class="partial">Pro 구독 포함</span></td>
+            <td><span class="cross">API 유료</span></td>
+            <td><span class="check">✓ 1,500회/일</span></td>
+          </tr>
+          <tr>
+            <td>IDE 통합</td>
+            <td>VS Code · JetBrains</td>
+            <td>VS Code</td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>운영체제</td>
+            <td>Mac · Linux · Windows</td>
+            <td>Mac · Linux · Windows</td>
+            <td>Mac · Linux · Windows</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 : PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">요금제 & 사용량</span>
+      <h2>비용은 얼마나 드나요?</h2>
+      <p>에이전트마다 과금 방식이 다릅니다. 구독형, API 종량제, 무료 티어를 잘 비교해 선택하세요.</p>
+    </div>
+
+    <!-- Claude Code Pricing -->
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--accent);">🟣 Claude Code</h3>
+    <div class="pricing-grid" style="margin-bottom:40px;">
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">API 종량제</div>
+          <div class="pricing-price">사용량 기반<span> / 토큰</span></div>
+          <div class="pricing-desc">Anthropic API 키로 직접 연결. 사용한 만큼만 과금됩니다.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Claude Sonnet 4: 입력 $3 / 출력 $15 (1M 토큰당)</li>
+            <li>Claude Opus 4: 입력 $15 / 출력 $75 (1M 토큰당)</li>
+            <li>Claude Haiku 4.5: 입력 $0.80 / 출력 $4 (1M 토큰당)</li>
+            <li>신용카드 등록 후 즉시 사용 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-header">
+          <div class="pricing-name">Claude.ai Pro<span class="pricing-badge">추천</span></div>
+          <div class="pricing-price">$20<span> / 월</span></div>
+          <div class="pricing-desc">Claude Code 사용량 포함. 개인 개발자에게 가장 적합합니다.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Claude Code 무제한(사용 제한 있음)</li>
+            <li>Claude.ai 웹 · 앱 사용 포함</li>
+            <li>우선 접근 (신규 기능 우선 제공)</li>
+            <li>月 5× 사용량 (일반 대비)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">Claude.ai Max</div>
+          <div class="pricing-price">$100<span> / 월</span></div>
+          <div class="pricing-desc">헤비 유저를 위한 최상위 플랜. 사실상 무제한 수준의 사용량.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Claude Code 거의 무제한</li>
+            <li>月 20× 사용량 (일반 대비)</li>
+            <li>최신 모델 우선 접근</li>
+            <li>팀 협업 기능 포함</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Codex Pricing -->
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#2E7D32;">🟢 OpenAI Codex CLI</h3>
+    <div class="pricing-grid" style="margin-bottom:40px;">
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">ChatGPT Plus</div>
+          <div class="pricing-price">$20<span> / 월</span></div>
+          <div class="pricing-desc">Codex CLI는 별도로 OpenAI API 키 필요. ChatGPT Plus와는 별개입니다.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>ChatGPT 웹 무제한 사용</li>
+            <li>Codex CLI는 API 키 추가 필요</li>
+            <li>GPT-4o, o1 등 최신 모델 사용</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-header">
+          <div class="pricing-name">OpenAI API<span class="pricing-badge">Codex용</span></div>
+          <div class="pricing-price">종량제<span> / 토큰</span></div>
+          <div class="pricing-desc">Codex CLI 사용에는 반드시 OpenAI API 키와 크레딧이 필요합니다.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>GPT-4.1: 입력 $2 / 출력 $8 (1M 토큰당)</li>
+            <li>GPT-4.1 mini: 입력 $0.40 / 출력 $1.60</li>
+            <li>신규 가입 시 $5 무료 크레딧 제공</li>
+            <li>별도 결제 카드 등록 필요</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">ChatGPT Pro</div>
+          <div class="pricing-price">$200<span> / 월</span></div>
+          <div class="pricing-desc">헤비 유저용. o1 Pro 등 최고 성능 모델 포함 (API 별도).</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>o1 Pro 무제한 사용</li>
+            <li>Sora 동영상 생성 포함</li>
+            <li>API 사용량은 여전히 별도 과금</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gemini Pricing -->
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#E65100;">🟠 Google Gemini CLI</h3>
+    <div class="pricing-grid">
+      <div class="pricing-card featured">
+        <div class="pricing-header">
+          <div class="pricing-name">개인 계정 무료<span class="pricing-badge">추천 시작점</span></div>
+          <div class="pricing-price">$0<span> / 월</span></div>
+          <div class="pricing-desc">Google 계정 로그인만으로 즉시 사용 가능. 가장 쉬운 시작 방법입니다.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Gemini 2.5 Pro 하루 1,500회 무료</li>
+            <li>분당 최대 60회 요청</li>
+            <li>별도 카드 등록 불필요</li>
+            <li>Google 계정만 있으면 즉시 시작</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">Gemini API 종량제</div>
+          <div class="pricing-price">사용량 기반<span> / 토큰</span></div>
+          <div class="pricing-desc">무료 한도 초과 시 자동으로 유료 전환 (설정 필요).</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Gemini 2.5 Pro: 입력 $1.25 / 출력 $10 (1M 토큰당)</li>
+            <li>Gemini 2.5 Flash: 입력 $0.15 / 출력 $0.60</li>
+            <li>Google AI Studio에서 키 발급</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-name">Google One AI Premium</div>
+          <div class="pricing-price">$19.99<span> / 월</span></div>
+          <div class="pricing-desc">Gmail, Docs, Drive 등 Google 워크스페이스와 Gemini 통합.</div>
+        </div>
+        <div class="pricing-body">
+          <ul>
+            <li>Gemini Advanced 무제한</li>
+            <li>Google Workspace 통합</li>
+            <li>2TB Google Drive 스토리지</li>
+            <li>Gemini CLI 사용량은 별도</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 : INSTALL -->
+<section id="install">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">설치 가이드</span>
+      <h2>단계별 설치 방법</h2>
+      <p>어떤 에이전트를 설치하시겠어요? 탭을 선택하면 해당 에이전트의 설치 순서를 확인할 수 있습니다.</p>
+    </div>
+
+    <div class="install-tabs">
+      <button class="install-tab active" onclick="switchTab('claude')">🟣 Claude Code</button>
+      <button class="install-tab" onclick="switchTab('codex')">🟢 Codex CLI</button>
+      <button class="install-tab" onclick="switchTab('gemini')">🟠 Gemini CLI</button>
+    </div>
+
+    <!-- Claude Code Install -->
+    <div class="install-panel active" id="panel-claude">
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Node.js 설치 (LTS 버전)</h4>
+            <p>Claude Code는 Node.js 18 이상이 필요합니다. 아래 명령어로 버전을 확인하세요. 없다면 <strong>nodejs.org</strong>에서 LTS 버전을 다운로드하세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>node --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Claude Code 설치</h4>
+            <p>npm을 사용해 Claude Code를 전역으로 설치합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>npm install -g @anthropic-ai/claude-code</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>작업 폴더로 이동 후 실행</h4>
+            <p>작업할 프로젝트 폴더로 이동한 뒤 <code style="background:var(--gray100);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">claude</code> 명령어로 시작합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>cd 내-프로젝트-폴더
+claude</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>로그인 인증</h4>
+            <p>최초 실행 시 Claude.ai 계정 또는 Anthropic API 키로 인증합니다. 브라우저가 자동으로 열립니다.</p>
+            <div class="note"><strong>Pro/Max 구독자:</strong> Claude.ai 계정으로 로그인하면 구독 사용량이 적용됩니다. API 키를 별도로 설정하면 API 과금이 적용됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>(선택) CLAUDE.md 파일로 맞춤 설정</h4>
+            <p>프로젝트 루트에 <code style="background:var(--gray100);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">CLAUDE.md</code> 파일을 만들면 Claude Code가 항상 이 지시사항을 참고합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">CLAUDE.md 예시</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code># 프로젝트 규칙
+- 한국어로 응답해줘
+- 코드 주석은 영어로
+- 컴포넌트는 함수형으로 작성
+- 커밋 메시지는 Conventional Commits 형식 사용</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Codex CLI Install -->
+    <div class="install-panel" id="panel-codex">
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Node.js 설치 확인</h4>
+            <p>Codex CLI도 Node.js 22 이상을 권장합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>node --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Codex CLI 설치</h4>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>npm install -g @openai/codex</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>OpenAI API 키 설정</h4>
+            <p>platform.openai.com에서 API 키를 발급받은 뒤 환경변수로 등록합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">macOS / Linux</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>export OPENAI_API_KEY="sk-..."
+# 영구 설정: ~/.zshrc 또는 ~/.bashrc에 위 줄 추가 후 source ~/.zshrc</code></div>
+            </div>
+            <div class="code-block" style="margin-top:8px;">
+              <div class="code-header">
+                <span class="code-lang">Windows (PowerShell)</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>$env:OPENAI_API_KEY = "sk-..."</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>실행</h4>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>codex</code></div>
+            </div>
+            <div class="note"><strong>모델 지정:</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:11px;">codex --model gpt-4.1-mini</code> 처럼 모델을 직접 선택할 수 있습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gemini CLI Install -->
+    <div class="install-panel" id="panel-gemini">
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Node.js 설치 확인</h4>
+            <p>Gemini CLI는 Node.js 18 이상이 필요합니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>node --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Gemini CLI 설치</h4>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>npm install -g @google/gemini-cli</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>실행 및 Google 계정 로그인</h4>
+            <p>처음 실행하면 Google 계정 인증 화면이 열립니다. 개인 계정으로 로그인하면 하루 1,500회 무료로 사용할 수 있습니다.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>gemini</code></div>
+            </div>
+            <div class="success note">Google 계정만 있으면 카드 등록 없이 바로 사용 가능합니다. 세 에이전트 중 가장 쉬운 시작 방법입니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>(선택) Gemini API 키로 전환</h4>
+            <p>더 많은 요청이 필요하다면 Google AI Studio에서 API 키를 발급받아 환경변수로 등록하세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">macOS / Linux</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>export GEMINI_API_KEY="AIza..."
+gemini</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 : CONCEPTS -->
+<section id="concepts">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">핵심 개념</span>
+      <h2>알아두면 좋은 용어들</h2>
+      <p>AI 에이전트를 사용하기 전에 알아두면 좋은 기본 개념들을 정리했습니다.</p>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="icon">💻</div>
+        <h3>CLI (Command Line Interface)</h3>
+        <p>그래픽 UI 없이 텍스트 명령어로 컴퓨터를 제어하는 방식입니다. 터미널(Terminal)이나 명령 프롬프트(CMD)에서 작동합니다. AI 에이전트들이 CLI 방식으로 제공되는 이유는 파일 시스템과 시스템 명령어에 직접 접근할 수 있어 자동화에 유리하기 때문입니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔌</div>
+        <h3>API (Application Programming Interface)</h3>
+        <p>프로그램 간 통신을 위한 표준화된 연결 통로입니다. AI 에이전트들은 모두 API를 통해 AI 모델과 통신합니다. API 키는 이 통신의 인증 수단으로, 사용량에 따라 요금이 부과됩니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔄</div>
+        <h3>Agentic Loop (자율 루프)</h3>
+        <p>AI가 목표를 달성할 때까지 스스로 계획 → 실행 → 검토를 반복하는 방식입니다. Claude Code의 경우: 파일 읽기 → 코드 작성 → 명령 실행 → 결과 확인 → 수정 과정을 반복합니다. 사람이 중간에 개입하지 않아도 복잡한 작업을 완수합니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🧩</div>
+        <h3>MCP (Model Context Protocol)</h3>
+        <p>AI가 외부 도구 및 데이터 소스와 안전하게 연결하기 위한 표준 프로토콜입니다. Claude Code에서 지원하며, 웹 검색, 데이터베이스, Slack, GitHub 등 다양한 서비스와 연동할 수 있습니다. 플러그인 시스템처럼 AI의 능력을 무한히 확장할 수 있습니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">📝</div>
+        <h3>토큰 (Token)</h3>
+        <p>AI가 텍스트를 처리하는 단위입니다. 영어는 약 4글자, 한국어는 약 1~2글자가 1토큰에 해당합니다. API 요금은 입력 토큰(내가 보낸 텍스트)과 출력 토큰(AI가 생성한 텍스트)을 합산해 계산됩니다. 1M(100만) 토큰당 가격으로 표시됩니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🧠</div>
+        <h3>컨텍스트 창 (Context Window)</h3>
+        <p>AI가 한 번의 대화에서 기억할 수 있는 정보의 최대 크기입니다. 클수록 긴 파일이나 많은 대화를 처리할 수 있습니다. Gemini 2.5 Pro는 100만 토큰(약 750만 단어)으로 세 에이전트 중 가장 큽니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">📁</div>
+        <h3>CLAUDE.md</h3>
+        <p>Claude Code에 특화된 프로젝트 설정 파일입니다. 이 파일에 지시사항을 적어두면 Claude Code가 매번 이를 참고해 일관된 방식으로 작업합니다. 언어 설정, 코딩 스타일, 절대 변경하지 말아야 할 내용 등을 정의할 수 있습니다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔒</div>
+        <h3>샌드박스 (Sandbox)</h3>
+        <p>격리된 실행 환경입니다. Codex CLI가 채택한 방식으로, AI가 실행하는 코드나 명령어가 실제 시스템에 영향을 주지 않도록 별도 공간에서 동작합니다. 보안성은 높지만 실제 파일 시스템 접근이 제한됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p><strong>AI Agent Edu</strong> — AI 코딩 에이전트 교육 자료</p>
+    <p style="margin-top:8px;">Claude Code · OpenAI Codex CLI · Google Gemini CLI 비교 가이드</p>
+    <p style="margin-top:16px;font-size:12px;">요금 및 기능은 각 서비스 정책에 따라 변경될 수 있습니다. 최신 정보는 공식 사이트를 확인하세요.</p>
+    <p style="margin-top:6px;font-size:12px;">
+      <a href="https://www.anthropic.com/claude-code" target="_blank">Claude Code 공식</a> ·
+      <a href="https://platform.openai.com" target="_blank">OpenAI Platform</a> ·
+      <a href="https://aistudio.google.com" target="_blank">Google AI Studio</a>
+    </p>
+    <p style="margin-top:20px;font-size:11px;opacity:.6;">2025 · guwolmotion-hub</p>
+  </div>
+</footer>
+
+<script>
+// tab switcher
+function switchTab(name) {
+  document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.install-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// copy button
+function copyCode(btn) {
+  const codeEl = btn.closest('.code-block').querySelector('code');
+  navigator.clipboard.writeText(codeEl.innerText).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 복사됨`;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> 복사`;
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
