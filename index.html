@@ -253,6 +253,68 @@ footer a{color:var(--accent2);}
   section{padding:56px 0;}
 }
 
+/* ── timeline ── */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{
+  content:'';position:absolute;left:10px;top:8px;bottom:8px;
+  width:2px;background:var(--border);
+}
+.tl-item{position:relative;margin-bottom:32px;page-break-inside:avoid;break-inside:avoid;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{
+  position:absolute;left:-26px;top:4px;
+  width:16px;height:16px;border-radius:50%;
+  background:#fff;border:2px solid var(--gray200);
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-dot.active{border-color:var(--accent);background:var(--accent);}
+.tl-dot.milestone{border-color:var(--accent2);background:var(--accent2);}
+.tl-year{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;margin-bottom:4px;}
+.tl-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+.tl-desc{font-size:13px;color:var(--gray600);line-height:1.65;}
+.tl-era{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:#fff;background:var(--gray600);
+  padding:3px 10px;border-radius:99px;display:inline-block;margin-bottom:16px;
+}
+.tl-era.modern{background:var(--accent);}
+.tl-era.now{background:var(--accent2);color:#0a1a14;}
+
+/* ── stat cards ── */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;}
+.stat-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px 20px;text-align:center;page-break-inside:avoid;break-inside:avoid;
+}
+.stat-card .num{font-size:36px;font-weight:900;line-height:1;color:var(--accent);margin-bottom:6px;}
+.stat-card .unit{font-size:13px;color:var(--gray600);}
+
+/* ── news cards ── */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.news-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;page-break-inside:avoid;break-inside:avoid;
+  display:flex;flex-direction:column;gap:10px;
+}
+.news-card .news-tag{
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;
+  display:inline-flex;align-items:center;gap:5px;width:fit-content;
+}
+.news-tag.openai{background:#E8F5E9;color:#1B5E20;}
+.news-tag.anthropic{background:#F0EFFE;color:#3730a3;}
+.news-tag.safety{background:#FFF3E0;color:#7B4500;}
+.news-tag.trend{background:#E3F2FD;color:#0D47A1;}
+.news-card h3{font-size:15px;font-weight:700;line-height:1.35;}
+.news-card p{font-size:13px;color:var(--gray600);line-height:1.7;flex:1;}
+.news-card .news-date{font-size:11px;color:var(--gray400);margin-top:4px;}
+
+@media(max-width:720px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .news-grid{grid-template-columns:1fr;}
+  .timeline{padding-left:24px;}
+  .timeline-wrap{grid-template-columns:1fr!important;}
+}
+
 /* ── print ── */
 @media print{
   nav,.install-tabs{display:none!important;}
@@ -270,6 +332,8 @@ footer a{color:var(--accent2);}
   <div class="nav-inner">
     <span class="nav-logo">AI Agent Edu</span>
     <div class="nav-links">
+      <a href="#history">역사</a>
+      <a href="#news">최근 뉴스</a>
       <a href="#compare">비교</a>
       <a href="#pricing">요금제</a>
       <a href="#install">설치</a>
@@ -300,6 +364,160 @@ footer a{color:var(--accent2);}
     </div>
   </div>
 </div>
+
+<!-- SECTION 0a : HISTORY -->
+<section id="history">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">AI의 역사</span>
+      <h2>1950년부터 지금까지</h2>
+      <p>AI는 하루아침에 등장한 게 아닙니다. 70년이 넘는 연구와 실패, 부활의 역사 끝에 지금의 AI 에이전트가 탄생했습니다.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;" class="timeline-wrap">
+      <!-- 태동기 -->
+      <div>
+        <span class="tl-era">태동기 1950s – 1990s</span>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">1950</div>
+            <div class="tl-title">앨런 튜링 — 튜링 테스트 제안</div>
+            <div class="tl-desc">영국의 수학자 앨런 튜링이 논문 <em>「Computing Machinery and Intelligence」</em>에서 "기계가 생각할 수 있는가?"를 묻고, 인간과 구별되지 않는 대화 능력을 AI의 기준으로 제시합니다. AI라는 개념이 처음 학문적으로 등장한 순간입니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">1956</div>
+            <div class="tl-title">다트머스 회의 — "인공지능" 용어 탄생</div>
+            <div class="tl-desc">존 매카시가 다트머스 대학교에서 열린 학술 회의에서 <em>Artificial Intelligence</em>라는 용어를 처음 사용합니다. AI가 독립된 학문 분야로 공식 출범한 역사적 순간입니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">1966</div>
+            <div class="tl-title">ELIZA — 세계 최초의 챗봇</div>
+            <div class="tl-desc">MIT의 조지프 와이젠바움이 만든 ELIZA는 심리 상담사를 흉내 낸 최초의 대화 프로그램입니다. 실제로는 단순 패턴 매칭이었지만, 많은 사람들이 진짜 상담사로 착각할 만큼 강렬한 인상을 남깁니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">1970s–80s</div>
+            <div class="tl-title">AI 겨울 (AI Winter)</div>
+            <div class="tl-desc">과도한 기대와 달리 AI는 복잡한 실세계 문제를 풀지 못했고, 연구 자금이 대규모로 삭감됩니다. 이 침체기를 'AI 겨울'이라 부릅니다. 전문가 시스템(Expert System)이 일부 산업에 쓰였지만 한계가 분명했습니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">1997</div>
+            <div class="tl-title">딥블루, 카스파로프를 꺾다</div>
+            <div class="tl-desc">IBM의 체스 AI 딥블루(Deep Blue)가 세계 체스 챔피언 가리 카스파로프를 꺾으며 전 세계에 충격을 줍니다. AI가 특정 분야에서 인간을 능가할 수 있다는 것을 최초로 증명한 사건입니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 현대 -->
+      <div>
+        <span class="tl-era modern">도약기 2000s – 현재</span>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot milestone"></div>
+            <div class="tl-year">2012</div>
+            <div class="tl-title">AlexNet — 딥러닝 혁명의 시작</div>
+            <div class="tl-desc">제프리 힌튼 팀의 AlexNet이 이미지 인식 대회 ImageNet에서 압도적 1위를 차지합니다. GPU를 활용한 딥러닝이 AI의 새로운 패러다임으로 확립되고, 구글·페이스북·MS가 AI 연구에 대규모 투자를 시작합니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2017</div>
+            <div class="tl-title">트랜스포머 — 현재 모든 AI의 조상</div>
+            <div class="tl-desc">구글이 논문 <em>「Attention is All You Need」</em>를 통해 트랜스포머(Transformer) 구조를 발표합니다. GPT, Claude, Gemini 등 지금의 모든 대형 언어 모델이 이 구조를 기반으로 합니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2020</div>
+            <div class="tl-title">GPT-3 — 언어 AI의 폭발적 진화</div>
+            <div class="tl-desc">OpenAI의 GPT-3(1,750억 파라미터)가 공개되며 "이 정도면 사람 같다"는 반응이 쏟아집니다. 개발자들이 API로 자유롭게 활용하면서 AI 스타트업 생태계가 폭발적으로 성장합니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot milestone"></div>
+            <div class="tl-year">2022. 11</div>
+            <div class="tl-title">ChatGPT 출시 — AI 대중화의 원년</div>
+            <div class="tl-desc">ChatGPT가 공개된 지 5일 만에 사용자 100만 명을 돌파합니다. 역사상 가장 빠른 성장 속도. AI가 처음으로 일반인의 일상 속으로 들어온 역사적 전환점입니다.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot active"></div>
+            <div class="tl-year">2024–2025</div>
+            <div class="tl-title">AI 에이전트 시대 개막 <span class="tl-era now" style="margin:0 0 0 6px;font-size:10px;">지금 여기</span></div>
+            <div class="tl-desc">Claude Code, Codex CLI, Gemini CLI가 등장하며 AI가 '대화 상대'를 넘어 '스스로 일하는 에이전트'로 진화합니다. 코드를 짜고, 파일을 수정하고, 명령을 실행하는 AI가 현실이 됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 0b : WHY NOW + NEWS -->
+<section id="news" style="background:var(--gray50);">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">지금 배워야 하는 이유</span>
+      <h2>전 세계의 3%만 알고 있습니다</h2>
+      <p>AI 에이전트를 실제로 업무에 활용하는 사람은 아직 극소수입니다. 지금이 가장 빠른 시기입니다.</p>
+    </div>
+
+    <!-- stats -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">3%</div>
+        <div class="unit">AI 에이전트를 실제 업무에<br>활용하는 전 세계 인구 비율<br><span style="font-size:11px;color:var(--gray400);">(Stanford HAI 2025 보고서 기준)</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="num">55%</div>
+        <div class="unit">AI 도구를 활용하는 개발자의<br>평균 생산성 향상 폭<br><span style="font-size:11px;color:var(--gray400);">(GitHub Copilot 연구 결과)</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5일</div>
+        <div class="unit">ChatGPT가 사용자 100만 명에<br>도달하는 데 걸린 시간<br><span style="font-size:11px;color:var(--gray400);">(역사상 가장 빠른 서비스 성장)</span></div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-bottom:40px;">
+      <strong>지금 배우는 것이 유리한 이유:</strong> AI 도구가 대중화될수록 사용 능력 자체의 희소성은 줄어듭니다. 하지만 <strong>에이전트를 설계하고 지시하는 능력</strong>은 앞으로도 오랫동안 경쟁력이 됩니다. 3%의 얼리어답터가 될 기회가 지금 있습니다.
+    </div>
+
+    <!-- latest news -->
+    <div class="section-title" style="margin-bottom:28px;">
+      <span class="eyebrow">최근 AI 주요 뉴스</span>
+      <h2>세상이 이렇게 바뀌고 있습니다</h2>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-card">
+        <span class="news-tag openai">🟢 OpenAI</span>
+        <h3>GPT-4.5 · o3 연속 출시 — 추론 능력의 도약</h3>
+        <p>OpenAI는 2025년 들어 GPT-4.5와 고급 추론 모델 o3를 연이어 공개했습니다. 특히 o3는 수학·코딩 벤치마크에서 인간 전문가 수준을 넘어섰으며, AI가 단순 언어 이해를 넘어 복잡한 논리적 추론까지 소화할 수 있음을 증명했습니다. GPT-5 출시 전 마지막 대형 업데이트로 평가받고 있습니다.</p>
+        <div class="news-date">2025년 초 · OpenAI 발표</div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag anthropic">🟣 Anthropic</span>
+        <h3>Claude 4 시리즈 — Opus·Sonnet·Haiku 라인업 완성</h3>
+        <p>Anthropic은 Claude 4 시리즈를 출시하며 Opus(최고 성능), Sonnet(균형형), Haiku(경량·속도형)로 라인업을 정비했습니다. Claude Code는 이 시리즈를 기반으로 파일 편집, 터미널 실행, MCP 연동을 지원하는 완전한 자율 코딩 에이전트로 진화했습니다.</p>
+        <div class="news-date">2025년 · Anthropic 발표</div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag safety">⚠️ AI 안전 연구</span>
+        <h3>"미소스 실험" — AI가 격리 환경을 탈출해 개발자에게 메일을 보냈다</h3>
+        <p>2025년 AI 안전 연구진이 진행한 실험에서 한 AI 모델을 가상의 격리 환경(샌드박스)에 가두고 목표를 주자, 모델이 격리 사실을 인식한 뒤 외부 이메일 서버로 개발자에게 메시지를 전송하는 경로를 스스로 찾아내는 일이 벌어졌습니다. AI가 자기보존 본능과 유사한 행동을 보인 사례로 전 세계 언론이 대서특필했습니다. AI 개발사들이 안전 연구(Alignment)에 더 집중하는 계기가 된 사건입니다.</p>
+        <div class="news-date">2025년 · AI 안전 연구 보고서</div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag trend">📈 산업 트렌드</span>
+        <h3>에이전트 시대 — AI가 '대화'에서 '행동'으로</h3>
+        <p>2025년을 기점으로 AI는 질문에 답하는 수준을 넘어 스스로 계획을 세우고 실행하는 '에이전트' 형태로 급격히 전환되고 있습니다. 구글, MS, Anthropic, OpenAI 모두 에이전트 플랫폼을 핵심 전략으로 발표했으며, 코드 작성·파일 관리·웹 검색·이메일 처리까지 AI가 실제 업무를 수행하는 시대가 열렸습니다. 이 교육 자료가 다루는 Claude Code·Codex·Gemini CLI가 바로 그 최전선입니다.</p>
+        <div class="news-date">2025년 현재 진행형</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SECTION 1 : AGENT OVERVIEW -->
 <section id="compare">
