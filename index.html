@@ -601,6 +601,23 @@ footer a{color:var(--accent2);}
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-content">
+            <h4>Git 설치</h4>
+            <p>Claude Code가 내부적으로 Git을 사용합니다. 아래 명령어로 설치 여부를 확인하고, 없다면 <strong>git-scm.com</strong>에서 다운로드하세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>git --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
             <h4>Node.js 설치 (LTS 버전)</h4>
             <p>Claude Code는 Node.js 18 이상이 필요합니다. 아래 명령어로 버전을 확인하세요. 없다면 <strong>nodejs.org</strong>에서 LTS 버전을 다운로드하세요.</p>
             <div class="code-block">
@@ -616,7 +633,25 @@ footer a{color:var(--accent2);}
           </div>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>⊞ Windows 전용 — 스크립트 실행 권한 설정</h4>
+            <p>Windows에서는 기본적으로 PowerShell 스크립트 실행이 차단됩니다. <strong>PowerShell을 관리자 권한으로 실행</strong>한 뒤 아래 명령어를 입력하세요. macOS/Linux는 이 단계를 건너뛰세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">PowerShell (관리자 권한)</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></div>
+            </div>
+            <div class="note warning"><strong>확인 메시지가 뜨면</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:11px;">Y</code> 를 입력하고 Enter를 누르세요. 이 설정은 한 번만 하면 됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
           <div class="step-content">
             <h4>Claude Code 설치</h4>
             <p>npm을 사용해 Claude Code를 전역으로 설치합니다.</p>
@@ -633,7 +668,7 @@ footer a{color:var(--accent2);}
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">5</div>
           <div class="step-content">
             <h4>작업 폴더로 이동 후 실행</h4>
             <p>작업할 프로젝트 폴더로 이동한 뒤 <code style="background:var(--gray100);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">claude</code> 명령어로 시작합니다.</p>
@@ -651,7 +686,7 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">4</div>
+          <div class="step-num">6</div>
           <div class="step-content">
             <h4>로그인 인증</h4>
             <p>최초 실행 시 Claude.ai 계정 또는 Anthropic API 키로 인증합니다. 브라우저가 자동으로 열립니다.</p>
@@ -659,7 +694,7 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">5</div>
+          <div class="step-num">7</div>
           <div class="step-content">
             <h4>(선택) CLAUDE.md 파일로 맞춤 설정</h4>
             <p>프로젝트 루트에 <code style="background:var(--gray100);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">CLAUDE.md</code> 파일을 만들면 Claude Code가 항상 이 지시사항을 참고합니다.</p>
@@ -688,8 +723,25 @@ claude</code></div>
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-content">
+            <h4>Git 설치</h4>
+            <p>설치 여부를 확인하고, 없다면 <strong>git-scm.com</strong>에서 다운로드하세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>git --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
             <h4>Node.js 설치 확인</h4>
-            <p>Codex CLI도 Node.js 22 이상을 권장합니다.</p>
+            <p>Codex CLI도 Node.js 22 이상을 권장합니다. <strong>nodejs.org</strong>에서 LTS 버전을 다운로드하세요.</p>
             <div class="code-block">
               <div class="code-header">
                 <span class="code-lang">terminal</span>
@@ -703,7 +755,25 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>⊞ Windows 전용 — 스크립트 실행 권한 설정</h4>
+            <p><strong>PowerShell을 관리자 권한으로 실행</strong>한 뒤 아래 명령어를 입력하세요. macOS/Linux는 건너뛰세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">PowerShell (관리자 권한)</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></div>
+            </div>
+            <div class="note warning"><strong>확인 메시지가 뜨면</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:11px;">Y</code> 를 입력하고 Enter를 누르세요.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
           <div class="step-content">
             <h4>Codex CLI 설치</h4>
             <div class="code-block">
@@ -747,7 +817,7 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">4</div>
+          <div class="step-num">5</div>
           <div class="step-content">
             <h4>실행</h4>
             <div class="code-block">
@@ -772,8 +842,25 @@ claude</code></div>
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-content">
+            <h4>Git 설치</h4>
+            <p>설치 여부를 확인하고, 없다면 <strong>git-scm.com</strong>에서 다운로드하세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">terminal</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>git --version</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
             <h4>Node.js 설치 확인</h4>
-            <p>Gemini CLI는 Node.js 18 이상이 필요합니다.</p>
+            <p>Gemini CLI는 Node.js 18 이상이 필요합니다. <strong>nodejs.org</strong>에서 LTS 버전을 다운로드하세요.</p>
             <div class="code-block">
               <div class="code-header">
                 <span class="code-lang">terminal</span>
@@ -787,7 +874,25 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>⊞ Windows 전용 — 스크립트 실행 권한 설정</h4>
+            <p><strong>PowerShell을 관리자 권한으로 실행</strong>한 뒤 아래 명령어를 입력하세요. macOS/Linux는 건너뛰세요.</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">PowerShell (관리자 권한)</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  복사
+                </button>
+              </div>
+              <div class="code-body"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></div>
+            </div>
+            <div class="note warning"><strong>확인 메시지가 뜨면</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:11px;">Y</code> 를 입력하고 Enter를 누르세요.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
           <div class="step-content">
             <h4>Gemini CLI 설치</h4>
             <div class="code-block">
@@ -803,7 +908,7 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">5</div>
           <div class="step-content">
             <h4>실행 및 Google 계정 로그인</h4>
             <p>처음 실행하면 Google 계정 인증 화면이 열립니다. 개인 계정으로 로그인하면 하루 1,500회 무료로 사용할 수 있습니다.</p>
@@ -821,7 +926,7 @@ claude</code></div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">4</div>
+          <div class="step-num">6</div>
           <div class="step-content">
             <h4>(선택) Gemini API 키로 전환</h4>
             <p>더 많은 요청이 필요하다면 Google AI Studio에서 API 키를 발급받아 환경변수로 등록하세요.</p>
