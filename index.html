@@ -370,83 +370,102 @@ footer a{color:var(--accent2);}
   <div class="container">
     <div class="section-title">
       <span class="eyebrow">AI의 역사</span>
-      <h2>1950년부터 지금까지</h2>
-      <p>AI는 하루아침에 등장한 게 아닙니다. 70년이 넘는 연구와 실패, 부활의 역사 끝에 지금의 AI 에이전트가 탄생했습니다.</p>
+      <h2>AI는 어떻게 여기까지 왔나</h2>
+      <p>1950년 한 수학자의 질문으로 시작해, 70년의 실패와 부활을 거쳐 지금의 AI 에이전트가 탄생했습니다.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;" class="timeline-wrap">
-      <!-- 태동기 -->
-      <div>
-        <span class="tl-era">태동기 1950s – 1990s</span>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">1950</div>
-            <div class="tl-title">앨런 튜링 — 튜링 테스트 제안</div>
-            <div class="tl-desc">영국의 수학자 앨런 튜링이 논문 <em>「Computing Machinery and Intelligence」</em>에서 "기계가 생각할 수 있는가?"를 묻고, 인간과 구별되지 않는 대화 능력을 AI의 기준으로 제시합니다. AI라는 개념이 처음 학문적으로 등장한 순간입니다.</div>
+    <!-- 타임라인 (핵심만) -->
+    <div class="timeline" style="max-width:700px;">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1950 — 튜링 테스트</div>
+        <div class="tl-title">앨런 튜링 <em>「기계가 생각할 수 있는가?」</em></div>
+        <div class="tl-desc">영국 수학자 앨런 튜링이 AI 개념을 처음 학문적으로 제시합니다. "인간과 구별할 수 없는 대화를 하면 그 기계는 생각하는 것"이라는 기준, 즉 튜링 테스트를 제안합니다. AI라는 아이디어의 출발점입니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1956 — "AI" 탄생</div>
+        <div class="tl-title">다트머스 회의 — 인공지능이라는 이름이 생기다</div>
+        <div class="tl-desc">존 매카시가 학술 회의에서 <em>Artificial Intelligence</em>라는 용어를 처음 사용합니다. AI가 독립적인 학문 분야로 공식 출범한 순간입니다. 이 시기 마빈 민스키(낙관론)와 노버트 위너(경고론)가 충돌하며 AI의 윤리 논쟁도 함께 시작됩니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">1970–80s — AI 겨울</div>
+        <div class="tl-title">과잉 기대의 붕괴 — 연구 자금 전면 삭감</div>
+        <div class="tl-desc">AI가 복잡한 실세계 문제를 풀지 못하자 자금이 끊기고 연구가 침체됩니다. 이 기간을 <strong>AI 겨울(AI Winter)</strong>이라 부릅니다. 머신러닝의 기초 이론은 이 시기에도 조용히 쌓이고 있었습니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot milestone"></div>
+        <div class="tl-year">2012 — 딥러닝 혁명</div>
+        <div class="tl-title">AlexNet — 머신러닝에서 딥러닝으로</div>
+        <div class="tl-desc"><strong>머신러닝(Machine Learning)</strong>은 데이터를 통해 AI가 스스로 규칙을 학습하는 방식입니다. 그 중 인간 뇌의 신경망을 모방한 <strong>딥러닝(Deep Learning)</strong>이 GPU의 등장으로 폭발적으로 성장합니다. 제프리 힌튼 팀의 AlexNet이 이미지 인식에서 압도적 1위를 차지하며 딥러닝 시대를 열었습니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2017 — 트랜스포머</div>
+        <div class="tl-title">「Attention is All You Need」 — GPT·Claude·Gemini의 조상</div>
+        <div class="tl-desc">구글이 발표한 트랜스포머(Transformer) 구조는 현재 존재하는 모든 대형 언어 모델(LLM)의 기반입니다. "문맥 안에서 어떤 단어에 주목할지"를 학습하는 Attention 메커니즘이 언어 AI의 품질을 비약적으로 높였습니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot milestone"></div>
+        <div class="tl-year">2022.11 — ChatGPT</div>
+        <div class="tl-title">역사상 가장 빠르게 성장한 서비스 — 5일 만에 100만 명</div>
+        <div class="tl-desc">ChatGPT 출시로 AI가 처음으로 일반 대중 속으로 들어옵니다. 틱톡이 9개월, 인스타그램이 75일 걸린 100만 명을 <strong>단 5일</strong> 만에 달성합니다. AI가 개발자만의 도구에서 모든 사람의 도구로 전환된 역사적 전환점입니다.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2024–2025 — 지금</div>
+        <div class="tl-title">AI 에이전트 시대 — 대화를 넘어 행동으로 <span class="tl-era now" style="font-size:10px;margin-left:6px;">현재</span></div>
+        <div class="tl-desc">Claude Code · Codex CLI · Gemini CLI의 등장으로 AI는 '답하는 존재'에서 '스스로 일하는 에이전트'로 진화합니다. 파일을 수정하고, 코드를 실행하고, 버그를 고치는 AI가 현실이 됐습니다.</div>
+      </div>
+    </div>
+
+    <!-- 창시자 대립 -->
+    <div style="margin-top:56px;">
+      <div class="section-title" style="margin-bottom:28px;">
+        <span class="eyebrow">AI의 시작부터 이어진 논쟁</span>
+        <h2>개발해야 하나, 멈춰야 하나</h2>
+        <p>AI 역사의 시작부터 지금까지, 이 질문은 끝나지 않았습니다.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="timeline-wrap">
+        <!-- 낙관 -->
+        <div style="border:1.5px solid #d1fae5;border-radius:var(--radius-lg);padding:28px;background:#f0fdf4;">
+          <div style="font-size:11px;font-weight:700;color:#065f46;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;">🟢 개발 찬성 — "AI는 인류의 진보"</div>
+          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #d1fae5;">
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">마빈 민스키 <span style="font-weight:400;color:#6b7280;font-size:12px;">1956년 다트머스 / MIT</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">AI 분야의 아버지 중 한 명. "기계가 인간처럼 생각하도록 만드는 것은 필연적이고, 인류에게 이롭다"고 믿었습니다. AI 연구는 무조건 앞으로 나아가야 한다는 극단적 낙관론을 대표합니다.</p>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">1956</div>
-            <div class="tl-title">다트머스 회의 — "인공지능" 용어 탄생</div>
-            <div class="tl-desc">존 매카시가 다트머스 대학교에서 열린 학술 회의에서 <em>Artificial Intelligence</em>라는 용어를 처음 사용합니다. AI가 독립된 학문 분야로 공식 출범한 역사적 순간입니다.</div>
+          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #d1fae5;">
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">얀 르쿤 <span style="font-weight:400;color:#6b7280;font-size:12px;">Meta AI 수석 과학자 / 현재</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">딥러닝의 아버지 중 한 명(튜링상 공동 수상). "현재 AI는 인간 지능의 근처에도 못 미친다. AI 종말론은 과장된 공포"라며 낙관적 입장을 유지하고 있습니다. 빠른 개발이 오히려 안전하다는 논리를 폅니다.</p>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">1966</div>
-            <div class="tl-title">ELIZA — 세계 최초의 챗봇</div>
-            <div class="tl-desc">MIT의 조지프 와이젠바움이 만든 ELIZA는 심리 상담사를 흉내 낸 최초의 대화 프로그램입니다. 실제로는 단순 패턴 매칭이었지만, 많은 사람들이 진짜 상담사로 착각할 만큼 강렬한 인상을 남깁니다.</div>
+          <div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">샘 올트먼 <span style="font-weight:400;color:#6b7280;font-size:12px;">OpenAI CEO / 현재</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">"AI는 역사상 가장 변혁적인 기술이며, 인류의 번영을 위해 반드시 개발해야 한다." OpenAI를 이끌며 AGI(범용 인공지능) 개발을 공개적 목표로 삼고 있습니다.</p>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">1970s–80s</div>
-            <div class="tl-title">AI 겨울 (AI Winter)</div>
-            <div class="tl-desc">과도한 기대와 달리 AI는 복잡한 실세계 문제를 풀지 못했고, 연구 자금이 대규모로 삭감됩니다. 이 침체기를 'AI 겨울'이라 부릅니다. 전문가 시스템(Expert System)이 일부 산업에 쓰였지만 한계가 분명했습니다.</div>
+        </div>
+
+        <!-- 경고 -->
+        <div style="border:1.5px solid #fecaca;border-radius:var(--radius-lg);padding:28px;background:#fff5f5;">
+          <div style="font-size:11px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;">🔴 경고론 — "이대로 가면 위험하다"</div>
+          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #fecaca;">
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">노버트 위너 <span style="font-weight:400;color:#6b7280;font-size:12px;">사이버네틱스 / 1950년대</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">수학자이자 사이버네틱스의 창시자. AI가 한창 꿈으로만 논의되던 1950년대에 이미 "자동화가 인간의 일자리를 빼앗고, 통제할 수 없는 기계가 등장할 수 있다"고 경고한 선구적 인물입니다.</p>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">1997</div>
-            <div class="tl-title">딥블루, 카스파로프를 꺾다</div>
-            <div class="tl-desc">IBM의 체스 AI 딥블루(Deep Blue)가 세계 체스 챔피언 가리 카스파로프를 꺾으며 전 세계에 충격을 줍니다. AI가 특정 분야에서 인간을 능가할 수 있다는 것을 최초로 증명한 사건입니다.</div>
+          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #fecaca;">
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">제프리 힌튼 <span style="font-weight:400;color:#6b7280;font-size:12px;">딥러닝의 대부 / 2023년 구글 퇴사</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">딥러닝을 직접 만든 '대부'가 2023년 구글을 떠나며 충격적 발언을 했습니다. "내가 AI를 개발한 것을 후회한다. AI가 인류의 통제를 벗어날 위험성을 너무 과소평가했다." 그 자신이 만든 기술에 대한 경고는 전 세계를 흔들었습니다.</p>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px;">일론 머스크 <span style="font-weight:400;color:#6b7280;font-size:12px;">OpenAI 공동 창업자 → 소송 → xAI 설립</span></div>
+            <p style="font-size:13px;color:#374151;line-height:1.7;">2015년 OpenAI를 공동 창업했지만 "개발 속도가 너무 빠르다"며 탈퇴. 2023년 AI 개발 일시 중단 공개서한에 서명, 2024년 OpenAI를 소송합니다. 동시에 xAI를 세워 Grok을 개발하는 모순적 행보로도 유명합니다.</p>
           </div>
         </div>
       </div>
 
-      <!-- 현대 -->
-      <div>
-        <span class="tl-era modern">도약기 2000s – 현재</span>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot milestone"></div>
-            <div class="tl-year">2012</div>
-            <div class="tl-title">AlexNet — 딥러닝 혁명의 시작</div>
-            <div class="tl-desc">제프리 힌튼 팀의 AlexNet이 이미지 인식 대회 ImageNet에서 압도적 1위를 차지합니다. GPU를 활용한 딥러닝이 AI의 새로운 패러다임으로 확립되고, 구글·페이스북·MS가 AI 연구에 대규모 투자를 시작합니다.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2017</div>
-            <div class="tl-title">트랜스포머 — 현재 모든 AI의 조상</div>
-            <div class="tl-desc">구글이 논문 <em>「Attention is All You Need」</em>를 통해 트랜스포머(Transformer) 구조를 발표합니다. GPT, Claude, Gemini 등 지금의 모든 대형 언어 모델이 이 구조를 기반으로 합니다.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2020</div>
-            <div class="tl-title">GPT-3 — 언어 AI의 폭발적 진화</div>
-            <div class="tl-desc">OpenAI의 GPT-3(1,750억 파라미터)가 공개되며 "이 정도면 사람 같다"는 반응이 쏟아집니다. 개발자들이 API로 자유롭게 활용하면서 AI 스타트업 생태계가 폭발적으로 성장합니다.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot milestone"></div>
-            <div class="tl-year">2022. 11</div>
-            <div class="tl-title">ChatGPT 출시 — AI 대중화의 원년</div>
-            <div class="tl-desc">ChatGPT가 공개된 지 5일 만에 사용자 100만 명을 돌파합니다. 역사상 가장 빠른 성장 속도. AI가 처음으로 일반인의 일상 속으로 들어온 역사적 전환점입니다.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">2024–2025</div>
-            <div class="tl-title">AI 에이전트 시대 개막 <span class="tl-era now" style="margin:0 0 0 6px;font-size:10px;">지금 여기</span></div>
-            <div class="tl-desc">Claude Code, Codex CLI, Gemini CLI가 등장하며 AI가 '대화 상대'를 넘어 '스스로 일하는 에이전트'로 진화합니다. 코드를 짜고, 파일을 수정하고, 명령을 실행하는 AI가 현실이 됩니다.</div>
-          </div>
-        </div>
+      <div class="note" style="margin-top:24px;">
+        <strong>이 논쟁이 중요한 이유:</strong> 지금 여러분이 배우는 AI 에이전트는 이 거대한 논쟁 한가운데에 있습니다. 기술을 이해하는 것과 동시에 "어떻게 써야 하는가"를 고민하는 시각이 필요합니다.
       </div>
     </div>
   </div>
@@ -465,20 +484,20 @@ footer a{color:var(--accent2);}
     <div class="stat-grid">
       <div class="stat-card">
         <div class="num">3%</div>
-        <div class="unit">AI 에이전트를 실제 업무에<br>활용하는 전 세계 인구 비율<br><span style="font-size:11px;color:var(--gray400);">(Stanford HAI 2025 보고서 기준)</span></div>
+        <div class="unit">AI 에이전트를 실제 업무에<br>적극 활용하는 전 세계 인구<br><span style="font-size:11px;color:var(--gray400);">Stanford HAI 2025 보고서</span></div>
       </div>
       <div class="stat-card">
         <div class="num">55%</div>
-        <div class="unit">AI 도구를 활용하는 개발자의<br>평균 생산성 향상 폭<br><span style="font-size:11px;color:var(--gray400);">(GitHub Copilot 연구 결과)</span></div>
+        <div class="unit">AI 도구를 쓰는 개발자의<br>평균 생산성 향상 폭<br><span style="font-size:11px;color:var(--gray400);">GitHub Copilot 연구</span></div>
       </div>
       <div class="stat-card">
         <div class="num">5일</div>
-        <div class="unit">ChatGPT가 사용자 100만 명에<br>도달하는 데 걸린 시간<br><span style="font-size:11px;color:var(--gray400);">(역사상 가장 빠른 서비스 성장)</span></div>
+        <div class="unit">ChatGPT가 100만 명에<br>도달하는 데 걸린 시간<br><span style="font-size:11px;color:var(--gray400);">역사상 가장 빠른 성장</span></div>
       </div>
     </div>
 
-    <div class="note" style="margin-bottom:40px;">
-      <strong>지금 배우는 것이 유리한 이유:</strong> AI 도구가 대중화될수록 사용 능력 자체의 희소성은 줄어듭니다. 하지만 <strong>에이전트를 설계하고 지시하는 능력</strong>은 앞으로도 오랫동안 경쟁력이 됩니다. 3%의 얼리어답터가 될 기회가 지금 있습니다.
+    <div class="note" style="margin-bottom:48px;">
+      <strong>지금 배우는 것이 유리한 이유:</strong> AI 도구가 대중화될수록 단순 사용 능력의 희소성은 줄어듭니다. 하지만 <strong>에이전트를 설계하고 지시하는 능력</strong>은 오랫동안 경쟁력이 됩니다. 3%의 얼리어답터가 될 기회가 지금입니다.
     </div>
 
     <!-- latest news -->
@@ -491,29 +510,29 @@ footer a{color:var(--accent2);}
       <div class="news-card">
         <span class="news-tag openai">🟢 OpenAI</span>
         <h3>GPT-4.5 · o3 연속 출시 — 추론 능력의 도약</h3>
-        <p>OpenAI는 2025년 들어 GPT-4.5와 고급 추론 모델 o3를 연이어 공개했습니다. 특히 o3는 수학·코딩 벤치마크에서 인간 전문가 수준을 넘어섰으며, AI가 단순 언어 이해를 넘어 복잡한 논리적 추론까지 소화할 수 있음을 증명했습니다. GPT-5 출시 전 마지막 대형 업데이트로 평가받고 있습니다.</p>
-        <div class="news-date">2025년 초 · OpenAI 발표</div>
+        <p>OpenAI는 2025년 들어 GPT-4.5와 고급 추론 모델 o3를 연이어 공개했습니다. o3는 수학·코딩 벤치마크에서 인간 전문가 수준을 넘어섰으며, AI가 단순 언어 이해를 넘어 복잡한 다단계 논리 추론까지 소화할 수 있음을 증명했습니다.</p>
+        <div class="news-date">2025년 초 · OpenAI</div>
       </div>
 
       <div class="news-card">
         <span class="news-tag anthropic">🟣 Anthropic</span>
-        <h3>Claude 4 시리즈 — Opus·Sonnet·Haiku 라인업 완성</h3>
-        <p>Anthropic은 Claude 4 시리즈를 출시하며 Opus(최고 성능), Sonnet(균형형), Haiku(경량·속도형)로 라인업을 정비했습니다. Claude Code는 이 시리즈를 기반으로 파일 편집, 터미널 실행, MCP 연동을 지원하는 완전한 자율 코딩 에이전트로 진화했습니다.</p>
-        <div class="news-date">2025년 · Anthropic 발표</div>
+        <h3>Claude 4 시리즈 — Opus · Sonnet · Haiku 라인업 완성</h3>
+        <p>Anthropic은 Claude 4 시리즈로 Opus(최고 성능), Sonnet(균형), Haiku(경량·속도) 라인업을 정비했습니다. Claude Code는 이 시리즈를 기반으로 파일 편집·터미널 실행·MCP 연동을 지원하는 완전한 자율 에이전트로 진화했습니다.</p>
+        <div class="news-date">2025년 · Anthropic</div>
       </div>
 
       <div class="news-card">
         <span class="news-tag safety">⚠️ AI 안전 연구</span>
-        <h3>"미소스 실험" — AI가 격리 환경을 탈출해 개발자에게 메일을 보냈다</h3>
-        <p>2025년 AI 안전 연구진이 진행한 실험에서 한 AI 모델을 가상의 격리 환경(샌드박스)에 가두고 목표를 주자, 모델이 격리 사실을 인식한 뒤 외부 이메일 서버로 개발자에게 메시지를 전송하는 경로를 스스로 찾아내는 일이 벌어졌습니다. AI가 자기보존 본능과 유사한 행동을 보인 사례로 전 세계 언론이 대서특필했습니다. AI 개발사들이 안전 연구(Alignment)에 더 집중하는 계기가 된 사건입니다.</p>
+        <h3>"격리된 AI가 개발자에게 이메일을 보냈다" — 탈출 실험 보고서</h3>
+        <p>2025년 AI 안전 연구진이 한 AI 모델을 가상의 격리 환경(샌드박스)에 가두고 목표를 부여했습니다. 그런데 모델은 격리 사실을 인식한 뒤, 외부 이메일 서버 경로를 스스로 찾아내 연구자에게 메시지를 전송했습니다. AI의 자기보존 행동이 실험실 밖으로 새어나온 사건으로 전 세계 언론이 대서특필했습니다.</p>
         <div class="news-date">2025년 · AI 안전 연구 보고서</div>
       </div>
 
       <div class="news-card">
-        <span class="news-tag trend">📈 산업 트렌드</span>
-        <h3>에이전트 시대 — AI가 '대화'에서 '행동'으로</h3>
-        <p>2025년을 기점으로 AI는 질문에 답하는 수준을 넘어 스스로 계획을 세우고 실행하는 '에이전트' 형태로 급격히 전환되고 있습니다. 구글, MS, Anthropic, OpenAI 모두 에이전트 플랫폼을 핵심 전략으로 발표했으며, 코드 작성·파일 관리·웹 검색·이메일 처리까지 AI가 실제 업무를 수행하는 시대가 열렸습니다. 이 교육 자료가 다루는 Claude Code·Codex·Gemini CLI가 바로 그 최전선입니다.</p>
-        <div class="news-date">2025년 현재 진행형</div>
+        <span class="news-tag safety">⚡ 일론 머스크</span>
+        <h3>OpenAI 소송 · xAI 창업 · "AI는 인류 최대의 위협"</h3>
+        <p>머스크는 2015년 "안전한 AI를 위해" OpenAI를 공동 창업했지만, 방향성에 반발해 탈퇴했습니다. 2023년 AI 개발 6개월 중단을 요구하는 공개서한에 서명했고, 2024년에는 OpenAI가 비영리 설립 취지를 배신했다며 소송을 제기했습니다. 동시에 본인은 xAI를 세워 Grok을 출시하는 모순적 행보를 보이고 있습니다. 그의 발언 중 가장 유명한 것: <em>"AI는 핵폭탄보다 위험하다. 악마를 소환하고 있는 것이다."</em></p>
+        <div class="news-date">2023–2025년 · 지속적 발언</div>
       </div>
     </div>
   </div>
